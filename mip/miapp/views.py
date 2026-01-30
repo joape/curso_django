@@ -113,7 +113,8 @@ def bienvenido(request):
     pagina="miapp/templates/miapp/bienvenido.html"
     with open(pagina, "r", encoding="utf8") as file:
         html = file.read()
-    return HttpResponse(html)
+    #return HttpResponse(html)
+    return render(request, "miapp/bienvenido.html")
 
 def bienvenido2(request):
     pagina="miapp/bienvenido2.html"

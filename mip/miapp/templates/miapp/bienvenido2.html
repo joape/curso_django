@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido2</title>
-</head>
+{% extends 'miapp/base.html' %}
+{% load static %}
+
+{% block title %}
+    Bienvenido2
+{% endblock title %}>
+
+{% block content %}
 <body>
     <h1>Bienvenidos al curso {{ nombre }}</h1>
     <h2>La cantidad de alumnos es: {{ alumnos }}</h2>
@@ -22,4 +23,4 @@
         {% endfor %}
     </ul>
 </body>
-</html>
+{% endblock content %}
