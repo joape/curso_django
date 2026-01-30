@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido2</title>
+</head>
+<body>
+    <h1>Bienvenidos al curso {{ nombre }}</h1>
+    <h2>La cantidad de alumnos es: {{ alumnos }}</h2>
+    <h2>La comision es: {{ comision }}</h2>
+    <h2>Los dias de clase son: {{ dias }}</h2>
+    <h3>Prof Norman Beltran</h3>
+    <h4>Notas de los alumnos:</h4>
+    <ul>
+        {% for nota in notas %}
+            {% if nota > 7 %}
+                <li style="color: green;">{{ nota }}</li>
+            {% else %}
+                <li style="color: red;">{{ nota }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

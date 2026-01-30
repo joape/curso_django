@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos los cursos</title>
+</head>
+<body>
+    <h1>Listado de todos los cursos</h1>
+    <ul>
+        {% for id, nombre, inscriptos in cursos %}
+            <li>{{ id }} - {{ nombre }} - {{ inscriptos }} inscriptos</li>
+        {% endfor %}
+    </ul>
+</body>
+<br>
+<h4><a href="{% url 'acerca' %}">Ir a Acerca de mi</a><br></h4>
+<h4><a href="{% url 'index' %}">Ir a Inicio</a><br></h4>
+<h4><a href="{% url 'uncurso' id=1 %}">Ir a Curso 1</a><br></h4>
+</html>

@@ -108,3 +108,45 @@ def aero_api(request):
             }
             aeropuertos.append(aeropuerto)
     return JsonResponse(aeropuertos, safe=False)
+
+def bienvenido(request):
+    pagina="miapp/templates/miapp/bienvenido.html"
+    with open(pagina, "r", encoding="utf8") as file:
+        html = file.read()
+    return HttpResponse(html)
+
+def bienvenido2(request):
+    pagina="miapp/bienvenido2.html"
+    ctx = {"nombre": "Django / Python", "alumnos":40, 
+           "comision":8888, "dias": "Martes y Jueves",
+           "notas": [8, 9, 10, 7, 6]}
+    return render(request, pagina, ctx)
+
+def uncurso(request, id):
+    conn = sqlite3.connect('curso.db')
+    cursor = conn.cursor()
+
+    # Leer los registros de la BD
+    cursor.execute("SELECT id, nombre, inscriptos FROM cursos WHERE id = ?;", (id,))
+    try:
+        (id, nombre, inscriptos) = cursor.fetchone()
+    except TypeError:  
+        conn.close()
+        return HttpResponse(f"El curso {id} no encontrado")
+        
+    ctx={"id": id, "nombre": nombre, "inscriptos": inscriptos}
+    conn.close()
+
+    return render(request, "miapp/uncurso.html", ctx)
+
+def allCursos(request):
+    conn = sqlite3.connect('curso.db')
+    cursor = conn.cursor()
+
+    # Leer los registros de la BD
+    cursor.execute("SELECT id, nombre, inscriptos FROM cursos;")
+    cursos = cursor.fetchall()
+    ctx={"cursos": cursos}
+    conn.close()
+
+    return render(request, "miapp/allcursos.html", ctx)
