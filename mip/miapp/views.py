@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.urls import reverse
+from .forms import FormularioCurso
 import sqlite3
 
 # Create your views here.
@@ -151,3 +153,26 @@ def allCursos(request):
     conn.close()
 
     return render(request, "miapp/allcursos.html", ctx)
+
+#_________________________________________________________________
+def nuevoCurso(request):
+    if request.method == "POST":
+        form = FormularioCurso(request.POST)
+        if form.is_valid():
+            nombre = form.cleaned_data['nombre']
+            inscriptos = form.cleaned_data['inscriptos']
+
+            # Insertar en la BD
+            conn = sqlite3.connect('curso.db')
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO cursos (nombre, inscriptos) VALUES (?, ?);", 
+                           (nombre, inscriptos))
+            conn.commit()
+            conn.close()
+
+            return HttpResponseRedirect(reverse('allcursos'))
+    else:
+        form= FormularioCurso()
+
+    ctx={"form": form}
+    return render(request, "miapp/nuevocurso.html", ctx)   

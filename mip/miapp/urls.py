@@ -16,4 +16,5 @@ urlpatterns = [
 
     path("uncurso/<int:id>/", views.uncurso, name="uncurso"),
     path("allcursos/", views.allCursos, name="allcursos"),  
+    path("nuevocurso/", views.nuevoCurso, name="nuevocurso"), 
 ]
