@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.urls import reverse
 from .forms import FormularioCurso
+from .models import Curso
 import sqlite3
 
 # Create your views here.
@@ -175,4 +176,21 @@ def nuevoCurso(request):
         form= FormularioCurso()
 
     ctx={"form": form}
-    return render(request, "miapp/nuevocurso.html", ctx)   
+    return render(request, "miapp/nuevocurso.html", ctx)  
+
+def allCursos_orm(request):    
+    cursos = Curso.objects.all()
+    ctx={"cursos": cursos}
+    return render(request, "miapp/cursos_orm.html", ctx) 
+
+def nuevoCurso_orm(request):
+    if request.method == "POST":
+        form = FormularioCurso(request.POST)
+        if form.is_valid():
+            form.save()  # Guarda el nuevo curso en la base de datos utilizando el ORM de Django
+            return HttpResponseRedirect(reverse('allcursos_orm'))
+    else:
+        form= FormularioCurso()
+
+    ctx={"form": form}
+    return render(request, "miapp/nuevocurso.html", ctx)  

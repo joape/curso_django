@@ -1,0 +1,21 @@
+{% extends 'miapp/base.html' %}
+{% load static %}
+
+{% block title %}
+    Todos los Cursos ORM
+{% endblock title %}
+
+{% block content %}
+<body>
+    <h1>Listado de todos los cursos ORM</h1>
+    <ul>
+        {% for c in cursos %}
+            <li>{{ c.id }} - {{ c.nombre }} - {{ c.inscriptos }} inscriptos</li>
+        {% endfor %}
+    </ul>
+</body>
+<br>
+<h4><a href="{% url 'acerca' %}">Ir a Acerca de mi</a><br></h4>
+<h4><a href="{% url 'index' %}">Ir a Inicio</a><br></h4>
+<h4><a href="{% url 'uncurso' id=1 %}">Ir a Curso 1</a><br></h4>
+{% endblock content %}
