@@ -1,0 +1,105 @@
+freewebsitetemplates.com
+
+python -m venv env (creo el ambiente)
+
+env\Scripts\actívate (para activarlo y me muestre el env en la consola)
+
+pip list (me muestra nada)
+
+pip install django (me lo instala en el ambiente)
+
+pip list (me muestra django y otras librerías)
+
+pip freeze > requirements.txt (Genera el archivo de requerimientos del proyecto)
+
+env\Sripts\deactivate.bat (salgo del entorno)
+
+django-admin startproject movies
+
+django-admin startapp mapp (dentro de movies)
+
+Se entra a settings de movies y se configura lo necesario
+Se registra mapp (la app)
+Se setea nombre de la BBDD (movies.db)
+Se setea lenguaje y timezone
+
+Python manage.py makemigrations
+Python manage.py migrate
+Python manage.py check
+
+Python manage.py createsuperuser
+
+Python manage.py runserver
+
+Arrancamos por el models de mapp
+Creamos la clase Gender (género)
+name, verbose_name=Genero
+fecha de creación auto_now=True
+fecha de update auto_now_adds=True
+
+Clase company
+name, verbose_name=Compañia
+fecha de creación auto_now=True
+fecha de update auto_now_adds=True
+
+Clase Movie
+name, verbose_name=Pelicula
+descripción
+rating (es un choice)
+premiere (año de estreno) not null y obligatorio null=False, blank=False
+
+índices:
+
+company = models.ForeignKey(Company, verbose_name="Compañía", on_delete=models.CASCADE)
+genders = models.ManyToManyField(Gener, verbose_name="Generos")
+image= models.ImageField(verbose_name="Cover", upload_to="covers", null=true, blank=True)
+fecha de creación auto_now=True
+fecha de update auto_now_adds=True
+
+Python manage.py makemigrations
+Python manage.py migrate
+
+se registra luego en el admin los 3 tablas
+
+visualizar objetos
+def __str__(self):
+	return f"{sel.name} esto en cada clase
+
+Class Meta: esto en cada clase
+	verbose_name_plural="Generos"
+	verbose_name="Genero"
+
+
+En admin.py
+class GenderAdmin(admin.ModelAdmin) se hace para cada clase
+	readonly_field = ('created', updated')
+	list_diplay = ('id', 'name', 'company', 'premiere', 'sinopsis', 'stars')
+	list_filter= ('genders','company')
+se registra luego en el admin los 3 tablas
+
+admin.site.register(Gender, GenderAdmin) lo mismo para cada clase.
+
+Ordenar alfabéticamente por el nombre.
+Eso es en models
+Dentro de meta.
+ordering= ["name"]
+
+@admin.displau(ordering="rating") #Es un decorador hay que importarlo from django.contrib import admin Muestra estrellas django.utils.html import format_html
+def stars(self)
+	st = self.rating * "*"
+	retunr format_html(f"<span style='color:red';>{st}</span>")
+
+acortar sinopsis
+
+@admin.diplay (ordering="description")
+	retunr format_html(f"<span style='color:blue';>{self.description[:20]+"..."}</span>")
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media") # importar os.
+
+en urls del proyecto
+from .import settings
+from django.urls import path, include
+
+if settings.DBUG:
+	urlpattenr
