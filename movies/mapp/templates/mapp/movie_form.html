@@ -1,0 +1,22 @@
+{% extends "mapp/base.html" %}
+{% load static %}
+{% block header %} {{ form.media }} {% endblock header %}
+{% block title %}
+Alta de Películas   
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid bg-secondary my-5">
+    <div class="container">
+        <div class="text-center pb-2">
+            <div class="col-lg-8 py-2 py-lg-2">
+                <form action="" method="post" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" class="btn btn-primary" value="Guardar Película">
+                </form>
+            </div>    
+        </div>
+    </div>
+</main>
+{% endblock content %}

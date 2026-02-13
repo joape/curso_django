@@ -24,4 +24,5 @@ admin.site.site_title = "Django Aplicacion"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('miapp/', include('miapp.urls')),
+    
 ]

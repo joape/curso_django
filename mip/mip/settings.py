@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     #Aplicaciones de negocio
     "miapp",
     
+    
+    
     #Aplicaciones de terceros
 ]
 
