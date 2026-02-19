@@ -32,6 +32,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
+    # Aplicaciones de terceros
+    "jazzmin",
+    
     # Aplicaciones de Django
     "django.contrib.admin",
     "django.contrib.auth",
@@ -43,7 +47,7 @@ INSTALLED_APPS = [
     # Aplicaciones de negocio
     "mapp",
 
-    # Aplicaciones de terceros
+    
     
 ]
 
